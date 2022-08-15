@@ -3,7 +3,7 @@
   <form @submit.prevent>
     <input type="text" class="input" placeholder="Name" v-model="author.name">
     <input type="text" class="input" placeholder="Surname" v-model="author.surname">
-    <default-button class="author-btn">Create</default-button>
+    <default-button class="author-btn" @click="createAuthor">Create</default-button>
   </form>
 </template>
 

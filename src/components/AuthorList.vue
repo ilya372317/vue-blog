@@ -1,16 +1,17 @@
 <template>
   <div class="author-list">
     <h1>Author List</h1>
-    <div class="author" v-for="author in authors">
-      <p><strong>Author name:</strong> {{ author.name }}</p>
-      <p><strong>Author surname</strong> {{ author.surname }}</p>
-    </div>
+    <author-item v-for="author in authors" :key="author.id" :author="author" @deleteAuthor="deleteAuthor"/>
   </div>
 </template>
 
 <script>
+import AuthorItem from "@/components/AuthorItem";
 export default {
   name: "AuthorList",
+  components: {
+    AuthorItem
+  },
   props: {
     authors: {
       type: Array,
@@ -25,6 +26,11 @@ export default {
         surname: ''
       }
     }
+  },
+  methods: {
+    deleteAuthor(author) {
+      this.$emit('deleteAuthor', author);
+    }
   }
 }
 </script>
@@ -32,18 +38,20 @@ export default {
 <style scoped>
 .author {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   padding: 15px;
   border: 1px solid teal;
   margin-top: 15px;
 
 }
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 p {
   margin: 3px;
 }
