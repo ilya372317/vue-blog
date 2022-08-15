@@ -1,7 +1,10 @@
 <template>
   <div class="app">
-    <PostForm @createPost="createPost"></PostForm>
-    <PostList :posts="posts"></PostList>
+    <default-dialog v-model:show="dialogStatus">
+      <PostForm @createPost="createPost"></PostForm>
+    </default-dialog>
+    <default-button @click="openDialog">Create post</default-button>
+    <PostList :posts="posts" @removePost="removePost"></PostList>
     <AuthorForm @createAuthor="createAuthor"></AuthorForm>
     <AuthorList :authors="authors"></AuthorList>
   </div>
@@ -12,6 +15,7 @@ import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
 import AuthorList from "@/components/AuthorList";
 import AuthorForm from "@/components/AuthorForm";
+import DefaultButton from "@/components/UI/DefaultButton";
 
 export default {
   data() {
@@ -21,6 +25,7 @@ export default {
         {id: 2, title: "Php 8 new features", body: "Enums it`s new meta"},
         {id: 3, title: "Best book about php", body: "Php-7 v podlinike is very impressive book."},
       ],
+      dialogStatus: true,
       authors: [
         {
           id: 1, name: "Ilya", surname: "Otinov"
@@ -29,16 +34,24 @@ export default {
     };
   },
   components: {
+    DefaultButton,
     AuthorForm,
     PostList, PostForm, AuthorList
   },
   methods: {
     createPost(post) {
       this.posts.push(post);
+      this.dialogStatus = false;
     },
     createAuthor(author) {
       console.log(author);
       this.authors.push(author);
+    },
+    removePost(post) {
+      this.posts = this.posts.filter(p => p.id !== post.id);
+    },
+    openDialog() {
+      this.dialogStatus = true;
     }
   }
 }

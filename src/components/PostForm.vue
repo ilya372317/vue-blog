@@ -1,14 +1,17 @@
 <template>
   <form @submit.prevent>
-    <input type="text" class="input" placeholder="Title" v-model="post.title">
-    <input type="text" class="input" placeholder="Description" v-model="post.body">
-    <button type="submit" class="btn" v-on:click="createPost">New post</button>
+    <h2>Create post</h2>
+    <default-input placeholder="Title" v-model="post.title"></default-input>
+    <default-input placeholder="Description" v-model="post.body"></default-input>
+    <default-button class="post-btn" @click="createPost">Create</default-button>
   </form>
 </template>
 
 <script>
+import DefaultInput from "@/components/UI/DefaultInput";
 export default {
   name: "PostForm",
+  components: {DefaultInput},
   methods: {
     createPost() {
       this.post.id = Date.now();
@@ -32,19 +35,9 @@ export default {
 </script>
 
 <style scoped>
-.input {
-  background: none;
-  border: 1px solid teal;
-  padding: 15px 20px;
-  margin-top: 15px;
-}
 
-.btn {
-  background: none;
-  border: 1px solid teal;
-  padding: 15px 20px;
+.post-btn {
   align-self: flex-end;
   margin-top: 15px;
-  color: teal;
 }
 </style>

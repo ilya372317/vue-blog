@@ -3,7 +3,7 @@
   <form @submit.prevent>
     <input type="text" class="input" placeholder="Name" v-model="author.name">
     <input type="text" class="input" placeholder="Surname" v-model="author.surname">
-    <button type="submit" class="btn" v-on:click="createAuthor">make author</button>
+    <default-button class="author-btn">Create</default-button>
   </form>
 </template>
 
@@ -42,11 +42,7 @@ form {
   padding: 15px 20px;
   margin: 15px 0;
 }
-.btn {
-  background: none;
-  border: 1px solid teal;
+.author-btn {
   align-self: flex-end;
-  padding: 10px 15px;
-  color: teal;
 }
 </style>
